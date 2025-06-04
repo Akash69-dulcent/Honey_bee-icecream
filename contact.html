@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% block title %} Contact{% endblock title %}
+
+{% block body %}
+<div class="contact-form">
+  <h2>Contact Us for Ice Cream</h2>
+  <form action="/contact" method="POST">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="contact">Contact:</label>
+      <input type="tel" id="contact" name="contact">
+    </div>
+    
+    <div class="form-group">
+      <label for="mesage">Message:</label>
+      <textarea id="mesage" name="mesage" required></textarea>
+    </div>
+    
+    <div class="form-group">
+      <button type="submit">Send Message</button>
+    </div>
+  </form>
+</div>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .contact-form {
+    background: #fff;
+    padding: 25px;
+    margin: auto;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .form-group button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form-group button:hover {
+    background-color: #0056b3;
+  }
+</style>
+{% endblock body %}

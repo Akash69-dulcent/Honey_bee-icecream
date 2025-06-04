@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <title>Honey Bee Ice Cream</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Enhanced Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      border-bottom: 3px solid #FFD700;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #FF6347 !important;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar-brand::before {
+      content: '🍯';
+      font-size: 1.8rem;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: #FF6347 !important;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-success {
+      border-color: #FFD700;
+      color: #FF6347;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-success:hover {
+      background-color: #FFD700;
+      border-color: #FFD700;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      padding-top: 20px;
+    }
+
+    .section-title {
+      color: white;
+      text-align: center;
+      margin: 40px 0 30px 0;
+      font-weight: 300;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, white, transparent);
+    }
+
+    /* Enhanced Hero Carousel */
+    .hero-carousel {
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .hero-carousel .carousel-item {
+      height: 450px;
+      position: relative;
+    }
+
+    .hero-slide {
+      height: 100%;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(45deg, var(--bg-color1), var(--bg-color2));
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .hero-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="honeycomb" patternUnits="userSpaceOnUse" width="20" height="20"><polygon fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" points="10,0 20,5.77 20,14.23 10,20 0,14.23 0,5.77"/></pattern></defs><rect width="100" height="100" fill="url(%23honeycomb)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      text-align: center;
+      color: white;
+      z-index: 2;
+      position: relative;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-icon {
+      font-size: 5.5rem;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    /* Enhanced color themes */
+    .slide-vanilla { --bg-color1: #FFE4B5; --bg-color2: #DEB887; }
+    .slide-chocolate { --bg-color1: #8B4513; --bg-color2: #A0522D; }
+    .slide-strawberry { --bg-color1: #FF69B4; --bg-color2: #FF1493; }
+
+    /* Enhanced Product Cards */
+    .product-carousel {
+      margin-bottom: 60px;
+    }
+
+    .product-card {
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 0 10px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: all 0.4s ease;
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--product-color), rgba(255,255,255,0.5), var(--product-color));
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    }
+
+    .product-icon {
+      font-size: 3.5rem;
+      color: var(--product-color);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover .product-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .product-price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--product-color);
+      margin-top: auto;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .product-description {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    /* Enhanced Product colors */
+    .product-mint { --product-color: #20B2AA; }
+    .product-caramel { --product-color: #DAA520; }
+    .product-cookies { --product-color: #8B4513; }
+    .product-berry { --product-color: #4169E1; }
+
+    /* Enhanced Testimonials */
+    .testimonial-carousel .carousel-item {
+      padding: 50px 20px;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 25px;
+      padding: 50px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      backdrop-filter: blur(15px);
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 30px;
+      font-size: 8rem;
+      color: rgba(255, 215, 0, 0.1);
+      font-family: serif;
+    }
+
+    .testimonial-icon {
+      font-size: 4.5rem;
+      color: #FF6347;
+      margin-bottom: 25px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .testimonial-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      color: #555;
+      font-size: 1.1rem;
+      position: relative;
+    }
+
+    .testimonial-author::before {
+      content: '—';
+      margin-right: 10px;
+      color: #FFD700;
+    }
+
+    .testimonial-rating {
+      color: #FFD700;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Enhanced Custom carousel controls */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+      border: 3px solid #FFD700;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      background: #FFD700;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-control-prev {
+      left: -30px;
+    }
+
+    .carousel-control-next {
+      right: -30px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(1);
+      width: 25px;
+      height: 25px;
+    }
+
+    /* Enhanced indicators */
+    .carousel-indicators [data-bs-target] {
+      background-color: #FFD700;
+      border: 2px solid white;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-indicators [data-bs-target].active {
+      background-color: #FF6347;
+      transform: scale(1.2);
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-icon {
+        font-size: 4rem;
+      }
+      
+      .product-card {
+        margin: 0 5px;
+        height: 300px;
+        padding: 20px;
+      }
+
+      .testimonial-card {
+        padding: 30px;
+        margin: 0 10px;
+      }
+
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 50px;
+        height: 50px;
+      }
+
+      .carousel-control-prev {
+        left: -15px;
+      }
+
+      .carousel-control-next {
+        right: -15px;
+      }
+    }
+
+    /* Loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .honey-bee {
+      font-size: 3rem;
+      animation: fly 2s ease-in-out infinite;
+    }
+
+    @keyframes fly {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="honey-bee">🐝</div>
+  </div>
+
+  <!-- Enhanced Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Honey Bee Ice Cream</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#featured">
+              <i class="fas fa-star me-1"></i>Featured
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#popular">
+              <i class="fas fa-fire me-1"></i>Popular
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#reviews">
+              <i class="fas fa-heart me-1"></i>Reviews
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-ice-cream me-1"></i>Flavors
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Classic Flavors</a></li>
+              <li><a class="dropdown-item" href="#">Premium Selection</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Seasonal Specials</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact">
+              <i class="fas fa-phone me-1"></i>Contact
+            </a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search flavors..." aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content" style="margin-top: 80px;">
+    <div class="container-fluid py-4">
+      
+      <!-- Carousel 1: Featured Flavors -->
+      <section id="featured">
+        <h2 class="section-title display-4">🍯 Featured Honey-Infused Flavors</h2>
+        <div class="hero-carousel">
+          <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            </div>
+            
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="hero-slide slide-vanilla">
+                  <div class="hero-content">
+                    <i class="fas fa-ice-cream hero-icon"></i>
+                    <h3 class="hero-title">Honey Vanilla Bean</h3>
+                    <p class="hero-subtitle">Premium Madagascar vanilla swirled with pure wildflower honey</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="carousel-item">
+                <div class="hero-slide slide-chocolate">
+                  <div class="hero-content">
+                    <i class="fas fa-cookie-bite hero-icon"></i>
+                    <h3 class="hero-title">Chocolate Honey Comb</h3>
+                    <p class="hero-subtitle">Rich Belgian chocolate with crunchy honeycomb pieces</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="carousel-item">
+                <div class="hero-slide slide-strawberry">
+                  <div class="hero-content">
+                    <i class="fas fa-heart hero-icon"></i>
+                    <h3 class="hero-title">Strawberry Bee Bliss</h3>
+                    <p class="hero-subtitle">Fresh strawberries with lavender honey from local hives</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Carousel 2: Popular Selections -->
+      <section id="popular">
+        <h2 class="section-title display-4">🔥 Popular Bee-autiful Selections</h2>
+        <div class="product-carousel">
+          <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row justify-content-center">
+                  <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="product-card product-mint">
+                      <div>
+                        <i class="fas fa-leaf product-icon"></i>
+                        <h4 class="product-title">Honey Mint Chip</h4>
+                        <p class="product-description">Refreshing mint with dark chocolate chips and honey drizzle</p>
+                      </div>
+                      <div class="product-price">$6.99</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="product-card product-caramel">
+                      <div>
+                        <i class="fas fa-candy-cane product-icon"></i>
+                        <h4 class="product-title">Salted Honey Caramel</h4>
+                        <p class="product-description">Rich caramel with sea salt and golden honey swirls</p>
+                      </div>
+                      <div class="product-price">$7.49</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="carousel-item">
+                <div class="row justify-content-center">
+                  <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="product-card product-cookies">
+                      <div>
+                        <i class="fas fa-cookie product-icon"></i>
+                        <h4 class="product-title">Honey Graham Crunch</h4>
+                        <p class="product-description">Vanilla ice cream with honey graham crackers</p>
+                      </div>
+                      <div class="product-price">$6.79</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="product-card product-berry">
+                      <div>
+                        <i class="fas fa-birthday-cake product-icon"></i>
+                        <h4 class="product-title">Blueberry Honey Cake</h4>
+                        <p class="product-description">Blueberry cheesecake with honey cake pieces</p>
+                      </div>
+                      <div class="product-price">$7.99</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Carousel 3: Customer Reviews -->
+      <section id="reviews">
+        <h2 class="section-title display-4">💕 What Our Sweet Customers Say</h2>
+        <div class="testimonial-carousel">
+          <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+            </div>
+            
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="testimonial-card">
+                  <i class="fas fa-ice-cream testimonial-icon"></i>
+                  <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <p class="testimonial-text">"Honey Bee Ice Cream is absolutely divine! The honey vanilla bean flavor takes me back to my grandmother's kitchen. It's pure nostalgia in every scoop!"</p>
+                  <div class="testimonial-author">Sarah Johnson, Food Blogger</div>
+                </div>
+              </div>
+              
+              <div class="carousel-item">
+                <div class="testimonial-card">
+                  <i class="fas fa-heart testimonial-icon"></i>
+                  <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <p class="testimonial-text">"Our family's new favorite spot! The kids love the honey mint chip, and I'm obsessed with the salted honey caramel. The quality is unmatched!"</p>
+                  <div class="testimonial-author">Mike Rodriguez, Local Dad</div>
+                </div>
+              </div>
+              
+              <div class="carousel-item">
+                <div class="testimonial-card">
+                  <i class="fas fa-thumbs-up testimonial-icon"></i>
+                  <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <p class="testimonial-text">"As a chef, I appreciate quality ingredients. Honey Bee Ice Cream uses real honey from local beekeepers - you can taste the difference. Simply exceptional!"</p>
+                  <div class="testimonial-author">Emma Thompson, Executive Chef</div>
+                </div>
+              </div>
+            </div>
+            
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Loading animation
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.getElementById('loadingOverlay').classList.add('fade-out');
+      }, 1000);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add active class to nav items on scroll
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Add parallax effect to hero sections
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      document.querySelectorAll('.hero-slide').forEach(slide => {
+        slide.style.transform = `translateY(${rate}px)`;
+      });
+    });
+  </script>
+  {% block body %}
+
+  {% endblock body %}
+</body>
+</html>
